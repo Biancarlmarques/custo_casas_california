@@ -517,11 +517,17 @@ modelo_k_fold2 <- train(median_house_value ~ longitude + latitude +
                          housing_median_age + total_rooms + total_bedrooms 
                        + population + households + median_income, dadosTrain,
                        method = "lm",trControl = treinamento_k_fold)
+
 modelo_k_fold3 <- train(median_house_value ~  + housing_median_age  +  median_income,dadosTrain2,
                         method = "lm",trControl = treinamento_k_fold)
+
+dadosTrain2 <- dadosTrain2 %>% mutate(ylambda)
+modelo_k_fold4 <- train(ylambda ~ housing_median_age + median_income,dadosTrain2,
+                        method = "lm",trControl = treinamento_k_fold)
+
 
 print(modelo_k_fold1)
 print(modelo_k_fold2)
 print(modelo_k_fold3)
-
+print(modelo_k_fold4)
 
